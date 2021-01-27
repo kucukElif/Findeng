@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AppUser>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <a asp-action="GetMemberByCity" asp-controller="Member" class="btn btn-dark float-left">Şehirlere Göre Kullanıcı Getir</a>
+    </div>
+    <div class="card-body">
+        <table id="membertable" class="table">
+            <thead>
+                <tr>
+                    <th>Kullanıcı Adı</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>Doğum Tarihi</th>
+                    <th>Email Adresi</th>
+                    <th>Cinsiyet</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td>@if (item.BirthDay !=null)
+                        {
+                            @item.BirthDay?.ToShortDateString();
+
+                        }
+                        else
+                        {
+                            <span>Belirtilmemiş</span>
+                        }</td>
+                        <td>@item.Email</td>
+                        <td>@switch (item.Gender)
+                            {
+                                case 0:
+                                    <span>Belirtilmemiş</span>
+                                    break;
+                                case 1:
+                                <span>Erkek</span>
+                                    break;
+                                case 2:
+                                <span>Kadın</span>
+                                break;
+                        }</td>
+    
+
+
+                            </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

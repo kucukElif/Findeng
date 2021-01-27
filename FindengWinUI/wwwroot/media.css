@@ -1,0 +1,31 @@
+﻿body {
+}
+.media-section {
+    position: absolute;
+    transform: translate(-53%,-53%);
+    margin-right:250px;
+}
+
+  /*  .media-section li {
+        list-style: none;
+        margin: 10px 30px;
+        display: inline-block;
+        font-size: 20px;
+        padding: 20px 20px;
+        color: blue;
+        border: 1px solid blue;
+    }*/
+
+    .media-section a {
+        color: blue;
+    }
+
+        .media-section a:hover {
+            color: #292929;
+        }
+
+    .media-section li:hover {
+        color: #292929;
+            border:1px solid #292929;
+transition: .5s;
+    }

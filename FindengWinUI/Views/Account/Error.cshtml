@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container" style="margin-top:10px">
+    <div class="row">
+        <div class="col-lg-6" style="text-align:left">
+            @if (ViewBag.Success != null)
+            {
+                <h5 class="text-danger">@ViewBag.Success</h5>
+            <h4 class="text-danger">@ViewBag.ErrorMessage</h4>}
+
+
+        </div>
+    </div>
+</div>
+

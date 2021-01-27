@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CVFile>
+@{
+    ViewData["Title"] = "CV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/bootstrap.css" rel="stylesheet" />
+<script src="~/js/jquery-3.5.1.min.js"></script>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3" style="margin-top:50px">
+
+
+            <div class="card">
+                <div class="card-header">
+                    <form asp-action="AddCV" asp-controller="Member" method="post" enctype="multipart/form-data">
+
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" name="cv" style="width:500px" id="customFileLang" />
+                                <label class="custom-file-label"  for="customFileLang" >CV Dosyası Yükle</label>
+                            </div>
+                        </div>
+                        <br />
+                        <button type="submit" class="btn btn-success float-right">Ekle</button>
+
+                    </form>
+
+                </div>
+                <div class="card-body">
+                    <table class="table table-light">
+                        <thead>
+                            <tr>
+                                <th>CV Dosyaları</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tbody>
+
+                                <tr>
+                                    <td><a href="~/CVs/@item.cvFile" target="_blank">@item.cvFile</a></td>
+                                    <td><a asp-controller="Member" asp-action="DeleteCV" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Kaldır</a></td>
+                                </tr>
+
+                            </tbody>
+
+                        }
+
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+
+@section scripts{
+    <script>
+
+        $('.custom-file-input').on('change', function () {
+            //get the file name
+            var fileName = $(this).val().split("\\").pop();
+            //replace the "Choose a file" label
+            $(this).next('.custom-file-label').html(fileName);
+        });
+
+
+
+    </script>
+
+
+}

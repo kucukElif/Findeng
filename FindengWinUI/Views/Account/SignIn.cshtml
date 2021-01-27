@@ -1,0 +1,31 @@
+﻿@model AppUserLoginVM
+@{
+    ViewData["Title"] = "Giriş Yap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card mx-auto" style="width:520px; margin-top:40px;">
+
+    <div class="card-body">
+        <h4 class="card-title mb-4">Admin Giriş</h4>
+        <form asp-action="SignIn" asp-controller="Account" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="Kullanıcı Adı" type="text">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div> <!-- form-group// -->
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" placeholder="Şifre" type="password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+
+            </div> <!-- form-group// -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block"> Giriş Yap  </button>
+            </div> <!-- form-group// -->
+        </form>
+    </div>
+
+</div>
+
+

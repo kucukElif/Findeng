@@ -1,0 +1,56 @@
+﻿@model CVFileVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        <table id="usertable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Kullanıcı Adı</th>
+                    <th>Adı</th>
+                    <th>Soyadı</th>
+                    <th>CV Dosyaları</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.CVFiles)
+                {
+                   
+                <tr>
+
+                    <td>@Model.AppUser.Where(x=>x.Id==user.AppUserId).FirstOrDefault().Id</td>
+                    <td>@Model.AppUser.Where(x=>x.Id==user.AppUserId).FirstOrDefault().UserName</td>
+                    <td>@Model.AppUser.Where(x=>x.Id==user.AppUserId).FirstOrDefault().FirstName</td>
+                    <td>@Model.AppUser.Where(x=>x.Id==user.AppUserId).FirstOrDefault().LastName</td>
+                    @*<td> @user.cvFile </td>*@
+                    
+                   <td><a href="~/CVs/@user.cvFile" target="_blank">@user.cvFile</a></td>
+
+                    
+
+
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#usertable').DataTable();
+        });
+    </script>
+
+
+}
+

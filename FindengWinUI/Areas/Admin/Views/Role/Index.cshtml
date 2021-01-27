@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AppUserRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4"><div class="card">
+    <div class="card-header">
+        <h2>Rol Listesi</h2>
+        @if (ViewBag.error!=null)
+        {
+            <div class="alert alert-danger">@ViewBag.error</div>
+        }
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Role Adı</th>
+                    <th>Silme</th>
+                    <th>Güncelleme</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var role in Model)
+                {
+                    <tr>
+                        <td>@role.Name</td>
+                        <td>
+                            <form asp-action="Delete" asp-controller="Role" asp-route-id="@role.Id" method="post">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Rol Sil
+                                </button>
+                            </form>
+                        </td>
+                        <td><a asp-action="Update" asp-controller="Role" asp-route-id="@role.Id" class="btn btn-primary">Güncelle</a></td>
+                    </tr>
+
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <a asp-action="AddRole" asp-controller="Role" class="btn btn-success float-right">Role Ekle</a>
+    </div>
+</div></div>
+       
+            
+            
+        </div>
+
+    </div>

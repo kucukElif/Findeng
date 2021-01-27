@@ -1,0 +1,164 @@
+﻿@model AppUserMemberVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/media.css" rel="stylesheet" />
+
+
+
+<div class="container mt-5 offset-md-2">
+    <div class="row">
+        <div class="col-3">
+
+            <div class="card" style="margin-bottom:35px">
+
+
+                @if (Model.AppUser.AppUserCV != null)
+                {
+                    @foreach (var item in Model.AppUserCVs)
+                    {
+                        @if (item.AppUserId == Model.AppUser.Id)
+                        {
+
+
+                            <img class="img-fluid card-img-top rounded" style="width:250px; height:250px;" src="~/images/@item.ImagePath" />
+
+
+
+
+                            <div class="card-body">
+
+                                <div class="media-section" style="margin-left:85%">
+
+                                    <a asp-action="EditProfile" asp-controller="Member" asp-route-id="@item.AppUserId"> <i class="far fa-edit"></i></a>
+
+                                </div>
+                                <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+                                <p class="card-text">@item.Department</p>
+                            </div>
+                        }
+                    }
+
+
+
+                }
+                else
+                {
+                    <img class="img-fluid card-img-top rounded" style="width:250px; height:250px;" src="~/images/noimage.jpg" />
+
+                    <a asp-action="CreateProfile" asp-controller="Member" asp-route-id="@Model.AppUser.Id" class=" card-img-top rounded float-right" title="profil oluştur" style="width:250px; height:auto; margin-left:70%" type="button"><i class="fas fa-camera fa-lg" style="margin-left:40px; margin-top:10px"></i></a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+                    </div>
+
+
+                }
+
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="col-md-9" style="margin-top:50px">
+
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="font-weight-bold">Kullanıcı</label>
+                    <br />
+                    <label>
+                        <span>@Model.FirstName</span> <span>@Model.LastName</span>
+                    </label>
+
+
+                </div>
+                <div class="form-group col-3">
+                    <label class="font-weight-bold">Email</label>
+                    <br />
+
+                    <span>@Model.Email</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="font-weight-bold">Kullanıcı Adı</label>
+                    <br />
+
+                    <span>@Model.UserName</span>
+                </div>
+                <div class="form-group col-3">
+                    <label class="font-weight-bold">Şehir</label>
+                    <br />
+
+                    <span>@Model.City</span>
+                </div>
+
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="font-weight-bold">Doğum Tarihi</label>
+                    <br />
+
+                    <span>
+                        @if (Model.BirthDay != null)
+                        {
+                            @Model.BirthDay.Value.ToShortDateString()
+                        }
+                        else
+                        {
+                            <span>Belirtilmemiş</span>
+                        }
+
+                </span>
+            </div>
+            <div class="form-group col-3">
+                <label class="font-weight-bold">Cinsiyet</label>
+                <br />
+
+                <span>
+                    @switch (Model.Gender)
+                    {
+                        case 0:
+                            <span>Belirtilmemiş</span>
+                            break;
+                        case 1:
+                            <span>Erkek</span>
+                            break;
+                        case 2:
+                            <span>Kadın</span>
+                            break;
+                    }
+                </span>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+</div>
+
+
+</div>

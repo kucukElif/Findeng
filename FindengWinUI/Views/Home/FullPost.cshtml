@@ -1,0 +1,27 @@
+﻿@model Post
+@{
+    ViewData["Title"] = "FullPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-mb-12">
+            <img class="card-img-top" src="~/images/@Model.ImagePath" alt="" style="height: 500px; width: 1120px">
+            <!-- Put anything you want here! There is just a spacer below for demo purposes! -->
+            <div style="height: 50px;"></div>
+        </div>
+
+        <section class="py-5">
+            <div class="container">
+                <h1>@Model.Title</h1>
+                <br />
+
+                <p>@Model.Body</p>
+            </div>
+        </section>
+    </div>
+</div>
+
+<br />
+<br />
+

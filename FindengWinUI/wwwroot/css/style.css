@@ -1,0 +1,44 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-footer {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+/* white icon class*/
+.fa-white {
+  color: white;
+}
+
+/* footer icon class*/
+footer .fa-white {
+  padding-left: 50px;
+}
+
+}
+.image-parent {
+  max-width: 60;
+}
+
+.borderless {
+  border: 0 none;
+}
+
+/*
+.container {
+  border: 1px solid #ccc;
+}
+*/
+
+
+
+
+
+

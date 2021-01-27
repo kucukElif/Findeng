@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Blog";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+<div class="row">
+
+    <!-- Blog Entries Column -->
+    <div class="col-md-12">
+
+       <br />
+        <br />
+        @foreach (var item in Model)
+        {
+            <!-- Blog Post -->
+            <div class="mb-4">
+                <img class="card-img-top" src="~/images/@item.ImagePath" alt="Card image cap"  style="width:100%; height:450px">
+                <div class="card-body">
+                    <h2 class="card-title">@item.Title</h2>
+                    <p class="card-text"  style="display:-webkit-box; -webkit-line-clamp:3;-webkit-box-orient: vertical; overflow:hidden">@item.Body</p>
+                    <a asp-action="FullPost" asp-controller="Home" asp-route-id="@item.ID" class="btn btn-primary">Devamını Oku &rarr;</a>
+                </div>
+                <div class=" text-muted">
+                    Yayın Tarihi @item.CreatedDate.Day/@item.CreatedDate.Month/@item.CreatedDate.Year
+                   
+                </div>
+            </div>
+        }
+
+
+
+
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center mb-4">
+            <li class="page-item">
+                <a class="page-link" href="#">&larr; Older</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Newer &rarr;</a>
+            </li>
+        </ul>
+
+    </div>
+
+  
+
+</div>
+<!-- /.row -->
+  </div>
+

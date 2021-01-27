@@ -1,0 +1,27 @@
+﻿@model AppUser
+@{
+    ViewData["Title"] = "GetMemberByCity";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        <form role="form" asp-action="GetMemberByCity" asp-controller="Member" method="post">
+            <div class="form-group">
+                <label for="tc">Şehir</label>
+                <input name="city"  asp-for="City" type="text" class="form-control" placeholder="Şehir adı girin">
+
+                <br />
+                <br />
+                <button type="submit" class="btn btn-primary">Kullanıcıları Getir</button>
+
+
+            </div>
+        </form>
+        @*<a asp-action="GetCustomer" asp-controller="Home" asp-route-id="@Model.ID" class="btn btn-sm btn-warning">Müşteri Getir</a>*@
+
+    </div>
+
+</div>
+

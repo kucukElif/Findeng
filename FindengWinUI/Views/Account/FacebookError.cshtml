@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "FacebookError";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3" style="margin-top:10px">
+            <div>
+               <h2>Hata meydana geldi.</h2>
+            </div>
+            <hr />
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li>@item</li>
+                    }
+                </ul>
+            </div>
+           
+        </div>
+    </div>
+</div>
+
