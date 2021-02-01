@@ -1,0 +1,32 @@
+﻿@model AppUserWorkCVFileVM
+@{
+    ViewData["Title"] = "AddCVFile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <p>@Model.AppUserWork.Company şirketine başvurun.</p>
+            </div>
+<div class="card-body">
+    
+    <div class="col-md-4">
+        @foreach (var item in Model.AppUserCV)
+        {
+            @if (item.AppUserId==Model)
+            {
+
+            }
+
+        }
+        @*<img class="img-fluid card-img-top rounded" style="width:100px; height:100px; border-radius:50px" src="~/images/@Model.AppUserCV.ImagePath" />
+        <p>@Model.AppUserCV.Department</p>
+        <p>@Model.AppUserCV.AppUser.City</p>*@
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+

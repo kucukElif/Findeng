@@ -47,4 +47,32 @@
     <Folder Include="wwwroot\CVs\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\startbootstrap-small-business-master\.gitignore" />
+    <None Include="wwwroot\startbootstrap-small-business-master\.travis.yml" />
+    <None Include="wwwroot\startbootstrap-small-business-master\gulpfile.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\LICENSE" />
+    <None Include="wwwroot\startbootstrap-small-business-master\README.md" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\jquery\jquery.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\jquery\jquery.min.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\jquery\jquery.min.map" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\jquery\jquery.slim.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\jquery\jquery.slim.min.js" />
+    <None Include="wwwroot\startbootstrap-small-business-master\vendor\jquery\jquery.slim.min.map" />
+  </ItemGroup>
+
 </Project>

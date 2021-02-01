@@ -1,0 +1,29 @@
+﻿@model AppUserWork
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-6 offset-md-3" style="margin-top:25px">
+    <div class="card">
+        <div class="card-header">
+            <div class="col-md-3 float-left">
+                <img src="~/logos/@Model.Logo" style="width:100px;height:100px" />
+            </div>
+            <div class="col-md-4 float-left">
+                <h5>@Model.Title</h5>
+                <p style="color:grey; height:10px">@Model.Company.@Model.Location</p>
+                <p style="color:grey">@Model.employmentType</p>
+                <a class="btn btn-primary" asp-action="AddCVFile" asp-controller="Member" asp-route-id="@Model.ID">Başvur</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <p>
+                @Model.Description
+            </p>
+           
+            <p>@Model.startDate.Day/@Model.startDate.Month/@Model.startDate.Year tarihinde yayınlandı</p>
+
+        </div>
+    </div>
+
+</div>

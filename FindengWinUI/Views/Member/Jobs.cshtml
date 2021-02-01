@@ -1,0 +1,97 @@
+﻿@model IEnumerable<AppUserWork>
+@{
+    ViewData["Title"] = "Jobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<!-- Page Content -->
+<div class="container">
+
+        <a class="btn btn-primary float-right " style="color:white;margin-left:10px" asp-action="MyJobs" asp-controller="Member"><i class="fas fa-briefcase"></i> İş İlanlarım</a>
+
+        <a class="btn btn-primary float-right " style="color:white;margin-left:10px" asp-action="PostJob" asp-controller="Member"><i class="far fa-edit"></i> İş ilanı ver</a>
+
+        <!-- Heading Row -->
+        <div class="row align-items-center my-5">
+            <div class="col-lg-7">
+            </div>
+            <div class="col-lg-5">
+
+            </div>
+        </div>
+        <!-- Call to Action Well -->
+        <div class="card text-white bg-secondary my-5 py-4 text-center">
+            <div class="card-body">
+                <form enctype="multipart/form-data" method="post">
+                    <div class="container">
+                        <div class="form-row">
+                            <div class="  form-group col-md-4">
+                                <input type="text" class="form-control" id="iconified" placeholder="&#xF002;  Unvan, yetenek veya şirket ile ara" style="        font-family: Arial, FontAwesome;
+        color: gray" />
+                            </div>
+                            <div class=" form-group col-md-4">
+                                <input type="text" class="form-control" id="iconified" placeholder="&#xf041;  Şehir veya posta kodu ile ara" style="        font-family: Arial, FontAwesome;
+        color: gray" />
+                            </div>
+                            <div class=" form-group col-md-4">
+                                <button type="submit" class="btn btn-primary float-left">Arama Yap</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-5">
+                    <a asp-action="Search" asp-controller="Member" asp-route-id="@item.ID" style="text-decoration:none; color:black">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <div class="col-md-6 float-left">
+                                    <img src="~/logos/@item.Logo" style="height:80px; width:80px" />
+                                </div>
+                                <div class="col-md-6 float-right" style="margin-top:15px">
+                                    <h5>@item.Company</h5>
+                                </div>
+
+                            </div>
+                            <div class="card-body">
+                                <h2 class="card-title">@item.Title</h2>
+                                <p class="card-text">@item.Description</p>
+                            </div>
+
+                        </div>
+                    </a>
+
+                </div>
+            }
+
+
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+
+
+
+
+    @section scripts{
+        <script>
+            $('#iconified').on('keyup', function () {
+                var input = $(this);
+                if (input.val().length === 0) {
+                    input.addClass('empty');
+                } else {
+                    input.removeClass('empty');
+                }
+            });</script>
+    }
+
+

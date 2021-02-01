@@ -28,14 +28,16 @@ namespace FindengWinUI.Controllers
         private readonly IAppUserCV appUserCVService;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ICVFileService cVFileService;
+        private readonly IAppUserWorkService appUserWorkService;
 
-        public MemberController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAppUserCV appUserCVService, IHostingEnvironment hostingEnvironment, ICVFileService cVFileService)
+        public MemberController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IAppUserCV appUserCVService, IHostingEnvironment hostingEnvironment, ICVFileService cVFileService, IAppUserWorkService appUserWorkService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.appUserCVService = appUserCVService;
             this.hostingEnvironment = hostingEnvironment;
             this.cVFileService = cVFileService;
+            this.appUserWorkService = appUserWorkService;
         }
         public async Task<IActionResult> Index()
         {
@@ -87,6 +89,16 @@ namespace FindengWinUI.Controllers
             cVFileService.Remove(cvFile.ID);
             return RedirectToAction("CV", "Member");
 
+        }
+        public IActionResult AddCVFile(CVFile model, Guid id)
+        {
+            AppUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            AppUserWorkCVFileVM appUserWorkCVFileVM = user.Adapt<AppUserWorkCVFileVM>();
+
+            appUserWorkCVFileVM.CVFile = cVFileService.GetByUser(user.Id);
+            appUserWorkCVFileVM.AppUserWork = appUserWorkService.GetById(id);
+            appUserWorkCVFileVM.AppUserCV = appUserCVService.GetActive(); ;
+            return View(appUserWorkCVFileVM);
         }
 
         public async Task<IActionResult> CreateProfile()
@@ -249,13 +261,13 @@ namespace FindengWinUI.Controllers
 
             if (ModelState.IsValid)
             {
-               
+
 
                 AppUser user = await userManager.FindByNameAsync(User.Identity.Name);
                 string phone = userManager.GetPhoneNumberAsync(user).Result;
-                if (phone!=appUserVM.PhoneNumber)
+                if (phone != appUserVM.PhoneNumber)
                 {
-                    if (userManager.Users.Any(u=>u.PhoneNumber==appUserVM.PhoneNumber))
+                    if (userManager.Users.Any(u => u.PhoneNumber == appUserVM.PhoneNumber))
                     {
                         ModelState.AddModelError("", "Bu telefon numarası başka bir üye tarafından kullanılmaktadır");
                         return View(appUserVM);
@@ -291,6 +303,120 @@ namespace FindengWinUI.Controllers
             }
             return View(appUserVM);
 
+        }
+
+        public IActionResult Jobs()
+        {
+            return View(appUserWorkService.GetActive());
+        }
+
+        public IActionResult PostJob()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> PostJob(AppUserWork model, IFormFile logo)
+        {
+            AppUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            try
+            {
+                string path;
+                if (logo == null)
+                {
+                    path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\logos", "nologo.png");
+                    model.Logo = "nologo.png";
+
+                }
+                else
+                {
+                    path = Path.GetFullPath("wwwroot\\logos\\" + logo.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await logo.CopyToAsync(stream);
+                    }
+                    model.Logo = logo.FileName;
+                }
+                var iduser = await userManager.FindByIdAsync(user.Id.ToString());
+                model.AppUser = iduser;
+                model.AppUserId = iduser.Id;
+                appUserWorkService.Add(model);
+                return RedirectToAction("Jobs");
+            }
+            catch (Exception ex)
+            {
+                return View(model);
+            }
+
+        }
+
+        public IActionResult MyJobs()
+        {
+            AppUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+            return View(appUserWorkService.GetByUser(user.Id));
+        }
+
+
+        public IActionResult EditJob(Guid id)
+        {
+            AppUserWork appUserWork = appUserWorkService.GetById(id);
+
+            TempData["Logo"] = appUserWork.Logo;
+            ViewBag.Logo = TempData["Logo"].ToString();
+
+            return View(appUserWork);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditJob(AppUserWork model, IFormFile logo)
+        {
+            AppUser user = userManager.FindByNameAsync(User.Identity.Name).Result;
+
+            try
+            {
+                string path;
+                if (model.Logo == null)
+                {
+                    if (model.Logo != null)
+                    {
+                        appUserWorkService.Update(model);
+                        return RedirectToAction("MyJobs");
+                    }
+                    path = Path.Combine(Directory.GetCurrentDirectory(), TempData["Logo"].ToString());
+                    model.Logo = TempData["Logo"].ToString();
+                }
+                else
+                {
+                    path = Path.GetFullPath("wwwroot\\logos" + logo.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await logo.CopyToAsync(stream);
+                    }
+                    model.Logo = logo.FileName;
+                }
+                model.AppUserId = user.Id;
+                appUserWorkService.Update(model);
+                return RedirectToAction("MyJobs");
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public IActionResult DeleteJob(Guid id)
+        {
+            return View(appUserWorkService.GetById(id));
+        }
+        [HttpPost]
+        public IActionResult DeleteJob(AppUserWork appUserWork)
+        {
+            appUserWorkService.Remove(appUserWork.ID);
+            return RedirectToAction("MyJobs");
+
+        }
+        public IActionResult Search(Guid id)
+        {
+            return View(appUserWorkService.GetById(id));
         }
     }
 }

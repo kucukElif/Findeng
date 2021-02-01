@@ -1,0 +1,16 @@
+﻿@model AppUserWork
+@{
+    ViewData["Title"] = "DeleteJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="Member" asp-action="DeleteJob">
+            <p>@Model.Title başlıklı iş ilanını silmek istediğinizden emin misiniz?</p>
+            <button class="btn btn-danger">Sil</button>
+            <a asp-action="MyJobs" asp-controller="Member" class="btn" >İptal</a>
+        </form>
+    </div>
+</div>
+

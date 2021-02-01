@@ -1,0 +1,70 @@
+﻿@model IEnumerable<AppUserWork>
+@{
+    ViewData["Title"] = "MyJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+@if (Model.Any())
+{
+
+    <div class="container py-5">
+
+
+        <!-- Content Row -->
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+
+
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <div class="col-md-6 float-left">
+                                <img src="~/logos/@item.Logo" style="height:80px; width:80px" />
+                            </div>
+                            <div class="col-md-6 float-right">
+                                <h5>@item.Company</h5>
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <h2 class="card-title">@item.Title</h2>
+                            <p class="card-text">@item.Description</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary btn-sm float-left " style="color:white" asp-action="EditJob" asp-controller="Member" asp-route-id="@item.ID">Güncelle</a>
+                            <a class="btn btn-danger btn-sm float-right " style="color:white" asp-action="DeleteJob" asp-controller="Member" asp-route-id="@item.ID">Sil</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            }
+
+
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 offset-lg-2 py-5">
+                <div class="alert alert-danger">
+                    Henüz iş ilanı bulunmuyor.
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
